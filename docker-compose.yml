@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  mongo:
+    build: ./mongodb_rs
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: mongo
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: 27017
+    ports: 
+      - 27017:27017
+  
+  rabbitmq:
+    image: rabbitmq:3.8
+    ports:
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: nest
+      RABBITMQ_DEFAULT_PASS: nestnest
